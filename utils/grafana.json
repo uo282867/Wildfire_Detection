@@ -1,0 +1,655 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 2,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "cdnuy73ubfvggb"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Show Image"
+              },
+              "properties": [
+                {
+                  "id": "links",
+                  "value": [
+                    {
+                      "targetBlank": true,
+                      "title": "",
+                      "url": "http://YOUR_SERVER_IP:5000/see/${__data.fields.id}"
+                    }
+                  ]
+                },
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "pattern": "(.*)",
+                        "result": {
+                          "index": 0,
+                          "text": "Show"
+                        }
+                      },
+                      "type": "regex"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Detected"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 758
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "id"
+              },
+              "properties": [
+                {
+                  "id": "custom.hidden",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 229
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 16,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "columns": [
+              {
+                "selector": "0",
+                "text": "Time",
+                "type": "timestamp"
+              },
+              {
+                "selector": "2",
+                "text": "Detected",
+                "type": "string"
+              },
+              {
+                "selector": "1",
+                "text": "Show Image",
+                "type": "string"
+              },
+              {
+                "selector": "1",
+                "text": "id",
+                "type": "string"
+              }
+            ],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "cdnuy73ubfvggb"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "refId": "A",
+            "root_selector": "",
+            "source": "url",
+            "type": "json",
+            "url": "http://YOUR_SERVER_IP:5000/data",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          }
+        ],
+        "title": "WildFire Alerts",
+        "transformations": [
+          {
+            "id": "formatTime",
+            "options": {
+              "outputFormat": "HH:mm - DD/MM/YYYY",
+              "timeField": "Time",
+              "useTimezone": true
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Time"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "cdnuy73ubfvggb"
+        },
+        "gridPos": {
+          "h": 16,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 3,
+        "options": {
+          "alt_field": "",
+          "baseUrl": "http://YOUR_SERVER_IP:5000/img/",
+          "height": "75",
+          "icon_field": "id",
+          "open_url": {
+            "base_url": "",
+            "enable": false,
+            "metric_field": "",
+            "open_in_tab": true,
+            "suffix": ""
+          },
+          "overlay": {
+            "bindings": {
+              "bindings": [],
+              "has_text": true,
+              "unbounded": "#66666620"
+            },
+            "field": "",
+            "height": {
+              "size": 5,
+              "unit": "%"
+            },
+            "position": "Top right",
+            "width": {
+              "size": 5,
+              "unit": "%"
+            }
+          },
+          "shared_cross_hair": {
+            "backgroundColor": "#FFFFFF10",
+            "borderColor": "#FFFFFF20"
+          },
+          "singleFill": true,
+          "slideshow": {
+            "duration": 10000,
+            "enable": false,
+            "infinite": true,
+            "pauseOnHover": true,
+            "transition": "Slide",
+            "transition_duration": 1000
+          },
+          "tooltip": false,
+          "tooltip_date_elapsed": false,
+          "tooltip_field": "",
+          "tooltip_include_date": false,
+          "tooltip_include_field": true,
+          "underline": {
+            "bindings": {
+              "bindings": [],
+              "has_text": true,
+              "unbounded": "#CCCCDCFF"
+            },
+            "bindings_field": "",
+            "field": "",
+            "text_align": "left",
+            "text_size": "14"
+          },
+          "width": "75"
+        },
+        "targets": [
+          {
+            "columns": [
+              {
+                "selector": "1",
+                "text": "id",
+                "type": "string"
+              },
+              {
+                "selector": "0",
+                "text": "time",
+                "type": "timestamp"
+              }
+            ],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "cdnuy73ubfvggb"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "refId": "A",
+            "root_selector": "",
+            "source": "url",
+            "type": "json",
+            "url": "http://YOUR_SERVER_IP:5000/data/all",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          }
+        ],
+        "title": "Last Predict",
+        "transformations": [
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "time"
+                }
+              ]
+            }
+          },
+          {
+            "id": "limit",
+            "options": {
+              "limitField": 1
+            }
+          }
+        ],
+        "type": "dalvany-image-panel"
+      },
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "cdnuy73ubfvggb"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Show Image"
+              },
+              "properties": [
+                {
+                  "id": "links",
+                  "value": [
+                    {
+                      "targetBlank": true,
+                      "title": "",
+                      "url": "http://YOUR_SERVER_IP:5000/see/${__data.fields.id}"
+                    }
+                  ]
+                },
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "pattern": "(.*)",
+                        "result": {
+                          "index": 0,
+                          "text": "Show"
+                        }
+                      },
+                      "type": "regex"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Detected"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 758
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "id"
+              },
+              "properties": [
+                {
+                  "id": "custom.hidden",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 229
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 15,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 2,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "columns": [
+              {
+                "selector": "0",
+                "text": "Time",
+                "type": "timestamp"
+              },
+              {
+                "selector": "2",
+                "text": "Detected",
+                "type": "string"
+              },
+              {
+                "selector": "1",
+                "text": "Show Image",
+                "type": "string"
+              },
+              {
+                "selector": "1",
+                "text": "id",
+                "type": "string"
+              }
+            ],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "cdnuy73ubfvggb"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "refId": "A",
+            "root_selector": "",
+            "source": "url",
+            "type": "json",
+            "url": "http://YOUR_SERVER_IP:5000/data/all",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          }
+        ],
+        "title": "WildFire Alerts Historic",
+        "transformations": [
+          {
+            "id": "formatTime",
+            "options": {
+              "outputFormat": "HH:mm - DD/MM/YYYY",
+              "timeField": "Time",
+              "useTimezone": true
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Time"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "cdnuy73ubfvggb"
+        },
+        "gridPos": {
+          "h": 15,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "id": 4,
+        "options": {
+          "alt_field": "",
+          "baseUrl": "http://YOUR_SERVER_IP:5000/img/",
+          "height": "75",
+          "icon_field": "id",
+          "open_url": {
+            "base_url": "",
+            "enable": false,
+            "metric_field": "",
+            "open_in_tab": true,
+            "suffix": ""
+          },
+          "overlay": {
+            "bindings": {
+              "bindings": [],
+              "has_text": true,
+              "unbounded": "#66666620"
+            },
+            "field": "",
+            "height": {
+              "size": 5,
+              "unit": "%"
+            },
+            "position": "Top right",
+            "width": {
+              "size": 5,
+              "unit": "%"
+            }
+          },
+          "shared_cross_hair": {
+            "backgroundColor": "#FFFFFF10",
+            "borderColor": "#FFFFFF20"
+          },
+          "singleFill": true,
+          "slideshow": {
+            "duration": 8000,
+            "enable": true,
+            "infinite": true,
+            "pauseOnHover": true,
+            "transition": "Slide",
+            "transition_duration": 1000
+          },
+          "tooltip": false,
+          "tooltip_date_elapsed": false,
+          "tooltip_field": "",
+          "tooltip_include_date": false,
+          "tooltip_include_field": true,
+          "underline": {
+            "bindings": {
+              "bindings": [],
+              "has_text": true,
+              "unbounded": "#CCCCDCFF"
+            },
+            "bindings_field": "",
+            "field": "",
+            "text_align": "left",
+            "text_size": "14"
+          },
+          "width": "75"
+        },
+        "targets": [
+          {
+            "columns": [
+              {
+                "selector": "1",
+                "text": "id",
+                "type": "string"
+              }
+            ],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "cdnuy73ubfvggb"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "refId": "A",
+            "root_selector": "",
+            "source": "url",
+            "type": "json",
+            "url": "http://YOUR_SERVER_IP:5000/data/all",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          }
+        ],
+        "title": "Historical Predicts",
+        "type": "dalvany-image-panel"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timeRangeUpdatedDuringEditOrView": false,
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Alert WildFire",
+    "uid": "cdpcblhsyz6yoc",
+    "version": 18,
+    "weekStart": ""
+  }
