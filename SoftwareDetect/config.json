@@ -1,0 +1,17 @@
+{
+    "server": {
+        "url": "http://YOUR_SERVER_IP:5000/add",
+        "key": "6cb333a9-d6fb-4286-a156-b5d4bfc57e68",
+        "notification_delay" : 5
+    },
+
+    "model": {
+        "path" : "./8_n/",
+        "name" : "best.pt"
+    },
+
+    "output": {
+        "path" : "./CameraPredicts/8_n",
+        "img_limit" : 200
+    }
+}
