@@ -6,7 +6,7 @@
     },
 
     "model": {
-        "path" : "./8_n/",
+        "path" : "./models/8_n/",
         "name" : "best.pt"
     },
 

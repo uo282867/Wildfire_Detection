@@ -1,4 +1,8 @@
 ServerDatabase/local_data/*
-SoftwareDetect/5_*
-SoftwareDetect/8_*
-SoftwareDetect/9_*
+SoftwareDetect/models/5_mu
+SoftwareDetect/models/5_xu
+SoftwareDetect/models/8_s
+SoftwareDetect/models/8_m
+SoftwareDetect/models/8_l
+SoftwareDetect/models/8_x
+SoftwareDetect/models/9_*
