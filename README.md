@@ -7,9 +7,7 @@ Este repositorio tiene la finalidad de almacenar el software desarrollado por En
 
 This repository is intended to store the software developed by Enrique Hilanderas for his TFG. In this repository, we can find a variety of small scripts for: training, and inference of YOLO models for both a PC and embedded systems like a Raspberry PI.
 
-** Content**
-
-[TOC]
+------------
 
 # Español
 ## Estructura del repositorio
