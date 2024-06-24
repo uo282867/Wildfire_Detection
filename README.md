@@ -26,7 +26,7 @@ En este directorio podemos encontrar un archivo *docker-compose.yaml* que nos pe
 #### Archivo database.env
 En este archivo se encuentran las credenciales por defecto de la base de datos, es recomendable cambiarlas en caso de querer usar el proyecto para cualquier cosa que no sea un test de este.
 
-*** API_KEYS ***: Este campo es una pequeña medida de seguridad empleada para que solo dispositivos autorizados sean capaces de escribir en la base de datos. Es muy recomendable generar una key nueva y no emplear la actual. En caso de modificarla, se ha de modificar también en el archivo *** config.json*** de *Software Detect*.
+***API_KEYS*** : Este campo es una pequeña medida de seguridad empleada para que solo dispositivos autorizados sean capaces de escribir en la base de datos. Es muy recomendable generar una key nueva y no emplear la actual. En caso de modificarla, se ha de modificar también en el archivo ***config.json*** de *Software Detect*.
 
 #### Funcionamiento de la API
 La API posee los siguientes métodos:
@@ -59,7 +59,7 @@ Una vez recibe una petición valida (posee la API_KEY correcta), se almacena en 
 cd /directorio/del/proyecto/ServerDatabase
 docker-compose up --build
 ```
-**Posibles fallos**
+**Posibles fallos** </br>
 Si por algún casual alguno de los contenedores falla y se para, esperar a que el otro este inicializado correctamente y volverlo a arrancar.
 
 ```
