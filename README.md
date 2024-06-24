@@ -12,7 +12,7 @@ This repository is intended to store the software developed by Enrique Hilandera
 [TOC]
 
 # Español
-## Structure of the repository
+## Estructura del repositorio
 Hay un total de 4 carpetas importantes con sus correspondientes scripts necesarios para su ejecución.
 - ServerDatabase.
 - SoftwareDetect.
