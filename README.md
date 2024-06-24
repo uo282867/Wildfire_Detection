@@ -69,24 +69,24 @@ docker-compose start
 
 ### Software Detect
 ------------
-**Antes de comenzar**
+**Antes de comenzar** </br>
 Esta aplicación esta ideada para ser empleada en un sistema empotrado. 
 En este caso, fue diseñado para una Raspberry PI 4, con una cámara [Raspberry Pi High Quality Camera](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/). En caso de emplear otro sistema empotrado y/o cámara (incompatible con Picamera2) será necesario cambiar como mínimo el script: ***predict-camera.py***.
 
 Es necesario también, sustituir en el archivo config.json `YOUR_SERVER_IP` por la IP del dispositivo en el que se esté ejecutando la **API** (ver: Server Database). Además, si se ha modificado la **API_KEY** de como se mencionó anteriormente se ha de sustituir también en este archivo por la nueva.
 
-también es necesario tener instalado [Python3](https://www.python.org/).
+También es necesario tener instalado [Python3](https://www.python.org/).
 
 ------------
 #### Instalar dependencias
-**Picamera 2**
+**Picamera 2** </br>
 En caso de cualquier posible error con la instalación, consultar la documentación oficial: https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf
 ```
 # bash
 sudo apt install -y python3-picamera2
 ```
 
-**Ultralytics**
+**Ultralytics** </br>
 En caso de cualquier posible error con la instalación, consultar la documentación oficial: https://docs.ultralytics.com/guides/raspberry-pi/#start-with-docker
 ```
 # bash
@@ -98,7 +98,7 @@ pip install ultralytics[export]
 
 sudo reboot
 ```
-**Error común**
+**Error común** </br>
 En el caso de que no te permita emplear el gestor de paquetes pip por este error:
 `error: externally-managed-environment`
 Es posible que puedas solucionarlo de la siguiente forma:
@@ -107,18 +107,18 @@ Es posible que puedas solucionarlo de la siguiente forma:
 sudo apt update
 sudo apt install python3-pip -y
 
-sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.bak
+sudo mv /usr/lib/{TU_VERSION_DE_PYTHON}/EXTERNALLY-MANAGED /usr/lib/{TU_VERSION_DE_PYTHON}/EXTERNALLY-MANAGED.bak
 
 pip install -U pip
 
 pip install ultralytics[export]
 
-sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED.bak /usr/lib/python3.11/EXTERNALLY-MANAGED
+sudo mv /usr/lib/{TU_VERSION_DE_PYTHON}/EXTERNALLY-MANAGED.bak /usr/lib/{TU_VERSION_DE_PYTHON}/EXTERNALLY-MANAGED
 
 sudo reboot
 ```
 
-**Pillow, request y cv2**
+**Pillow, request y cv2** </br>
 ```
 # bash
 sudo apt install -y python3-request
@@ -140,26 +140,26 @@ Para el entrenamiento es **necesario** un dataset. Si deseas acceder al dataset 
 Una vez poseas un dataset adecuado para entrenar modelos YOLO guardalo dentro  del directorio Train con el nombre `Dataset`.
 
 #### Ejecucion
-**Instalar e importar ultralytics:**
+**Instalar e importar ultralytics:** </br>
 Ejecutar las dos primeras celdas:
 `! pip install ultralytics`
 `from ultralytics import YOLO`
 
-** Seleccionar el modelo a entrenar **
+**Seleccionar el modelo a entrenar** </br>
 Ejecutar la celda con el nombre del modelo que deseas entrenar.
 Ej. para entrenar YOLOv8n, ejecutar la celda:
 `modelName = "yolov8n"`
 Para entrenar otros modelos consultar la wiki de ultralytics: https://docs.ultralytics.com/models/
 
-** Realizar el entrenamiento **
+**Realizar el entrenamiento** </br>
 Ejecutar la siguiente celda:
 ```
 # Load a model
-model = YOLO("yolov8n.yaml")  # build a new model from YAML
-##model = YOLO(modelName+".pt")  # load a pretrained model (recommended for training)
+##model = YOLO("yolov8n.yaml")  # build a new model from YAML
+model = YOLO(modelName+".pt")  # load a pretrained model (recommended for training)
 
 # Train the model
-results = model.train(data="./Dataset/data.yaml", epochs=200, imgsz=640, device=[1], project='runs/detect/'+modelName)
+results = model.train(data="./Dataset/data.yaml", epochs=200, imgsz=640, project='runs/detect/'+modelName)
 ```
 Si tu dataset no se encuentra en el directorio especificado en la celda o posee otro nombre, modificar la ruta en la celda para que coincida.
 Es necesario poseer el archivo ***data.yaml***.
@@ -167,14 +167,14 @@ La ultima celda fue creada para reentrenar uno de los modelos ya entrenados con 
 
 ### Utils
 ------------
-En esta carpeta podemos encontarar un archivo JSON para poder importarlo en grafana. Este Dashboard nos permite ver en tiempo real las detecciones que se realizan.
+En esta carpeta podemos encontarar un archivo JSON para poder importarlo en grafana. Este Dashboard nos permite ver en tiempo real las detecciones que se realizan.  </br>
 **Requisitos**
 - Tener instalado grafana
 - Instalar los siguientes plugins de grafana:
 	- `Infinity` : https://github.com/grafana/grafana-infinity-datasource
 	- `Dynamic image panel` : https://github.com/Dalvany/dalvany-image-panel
 
-**ANTES DE IMPORTAR EL ARCHIVO! **
+**ANTES DE IMPORTAR EL ARCHIVO!** </br>
 Reemplaza en el archivo todos los: `YOUR_SERVER_IP` con la IP del dispositivo donde estes almacenando los datos obtenidos de la inferencia junto con la API para acceder a los datos de la base de datos (ver: ***Server Database***). 
 
 # English translation
@@ -227,7 +227,7 @@ Once it receives a valid request (it has the correct API_KEY), it stores the obt
 cd /project/directory/ServerDatabase
 docker-compose up --build
 ```
-**Possible Failures**
+**Possible errors** </br>
 If for some reason one of the containers fails and stops, wait for the other to initialize correctly and restart it.
 
 ```
@@ -237,7 +237,7 @@ docker-compose start
 
 ### Software Detect
 ------------
-**Before Starting**
+**Before Starting** </br>
 This application is designed to be used on an embedded system. 
 In this case, it was designed for a Raspberry PI 4, with a [Raspberry Pi High Quality Camera](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/). If using another embedded system and/or camera (incompatible with Picamera2) it will be necessary to change at least the script: ***predict-camera.py***.
 
@@ -247,14 +247,14 @@ It is also necessary to have [Python3](https://www.python.org/) installed.
 
 ------------
 #### Install Dependencies
-**Picamera 2**
+**Picamera 2** </br>
 In case of any possible error with the installation, refer to the official documentation: https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf
 ```
 # bash
 sudo apt install -y python3-picamera2
 ```
 
-**Ultralytics**
+**Ultralytics** </br>
 In case of any possible error with the installation, refer to the official documentation: https://docs.ultralytics.com/guides/raspberry-pi/#start-with-docker
 ```
 # bash
@@ -266,7 +266,7 @@ pip install ultralytics[export]
 
 sudo reboot
 ```
-**Common Error**
+**Common Error** </br>
 If you are unable to use the pip package manager due to this error:
 `error: externally-managed-environment`
 You may be able to solve it as follows:
@@ -275,18 +275,18 @@ You may be able to solve it as follows:
 sudo apt update
 sudo apt install python3-pip -y
 
-sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.bak
+sudo mv /usr/lib/{YOUR_PYTHON_VERSION}/EXTERNALLY-MANAGED /usr/lib/{YOUR_PYTHON_VERSION}/EXTERNALLY-MANAGED.bak
 
 pip install -U pip
 
 pip install ultralytics[export]
 
-sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED.bak /usr/lib/python3.11/EXTERNALLY-MANAGED
+sudo mv /usr/lib/{YOUR_PYTHON_VERSION}/EXTERNALLY-MANAGED.bak /usr/lib/{YOUR_PYTHON_VERSION}/EXTERNALLY-MANAGED
 
 sudo reboot
 ```
 
-**Pillow, request and cv2**
+**Pillow, request and cv2** </br>
 ```
 # bash
 sudo apt install -y python3-request
@@ -308,26 +308,26 @@ For training, a **dataset** is **required**. If you want to access the dataset u
 Once you have a suitable dataset to train YOLO models, save it inside the Train directory with the name `Dataset`.
 
 #### Execution
-**Install and import ultralytics:**
+**Install and import ultralytics:** </br>
 Run the first two cells:
 `! pip install ultralytics`
 `from ultralytics import YOLO`
 
-** Select the model to train **
+**Select the model to train** </br>
 Run the cell with the name of the model you want to train.
 E.g., to train YOLOv8n, run the cell:
 `modelName = "yolov8n"`
 To train other models, refer to the ultralytics wiki: https://docs.ultralytics.com/models/
 
-** Perform the training **
+**Perform the training** </br>
 Run the following cell:
 ```
 # Load a model
-model = YOLO("yolov8n.yaml")  # build a new model from YAML
-##model = YOLO(modelName+".pt")  # load a pretrained model (recommended for training)
+##model = YOLO("yolov8n.yaml")  # build a new model from YAML
+model = YOLO(modelName+".pt")  # load a pretrained model (recommended for training)
 
 # Train the model
-results = model.train(data="./Dataset/data.yaml", epochs=200, imgsz=640, device=[1], project='runs/detect/'+modelName)
+results = model.train(data="./Dataset/data.yaml", epochs=200, imgsz=640, project='runs/detect/'+modelName)
 ```
 If your dataset is not in the directory specified in the cell or has a different name, modify the path in the cell to match.
 It is necessary to have the ***data.yaml*** file.
@@ -335,12 +335,12 @@ The last cell was created to retrain one of the already trained models with anot
 
 ### Utils
 ------------
-In this folder, we can find a JSON file to import into Grafana. This Dashboard allows us to see the detections in real-time.
+In this folder, we can find a JSON file to import into Grafana. This Dashboard allows us to see the detections in real-time. </br>
 **Requirements**
 - Have Grafana installed
 - Install the following Grafana plugins:
 	- `Infinity` : https://github.com/grafana/grafana-infinity-datasource
 	- `Dynamic image panel` : https://github.com/Dalvany/dalvany-image-panel
 
-**BEFORE IMPORTING THE FILE!**
+**BEFORE IMPORTING THE FILE!** </br>
 Replace all occurrences of `YOUR_SERVER_IP` in the file with the IP of the device where you are storing the inference data along with the API to access the database data (see: ***Server Database***).
