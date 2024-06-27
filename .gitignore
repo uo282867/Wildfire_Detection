@@ -6,3 +6,6 @@ SoftwareDetect/models/8_m
 SoftwareDetect/models/8_l
 SoftwareDetect/models/8_x
 SoftwareDetect/models/9_*
+**/__pycache__
+SoftwareDetect/CameraPredicts
+SoftwareDetect/config.json

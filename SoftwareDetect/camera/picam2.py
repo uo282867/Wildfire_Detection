@@ -14,7 +14,7 @@ class Camera:
         self.cam.start()
 
     def isOpen(self):
-        return self.is_open
+        return self.cam.is_open
     
     def getFrame(self):
         return self.cam.capture_array()
