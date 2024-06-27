@@ -14,7 +14,7 @@ def send_notification(message, img_url):
     # Notification payload
     payload = {
         'title': 'WARNING: WildFire Detection',
-        'message': message[:-2], 
+        'message': message, 
         'key' : configuracion['server']['key']
     }
     

@@ -3,7 +3,8 @@ import cv2
 import time
 import os
 import json
-from picamera2 import Picamera2
+from camera.picam2 import Camera
+
 
 from notify import send_notification
 
@@ -15,11 +16,8 @@ with open('config.json', 'r') as f:
 
 #####################################      CAMERA SET UP     #################################################
 
-cam = Picamera2()
-cam.preview_configuration.main.size = (1280, 720)
-cam.preview_configuration.main.format = "RGB888"
-cam.preview_configuration.align()
-cam.configure("preview")
+cam = Camera()
+cam.configure()
 cam.start()
 
 #####################################  MODEL AND DIR SET UP  #################################################
@@ -38,14 +36,14 @@ c = 1
 #####################################       MAIN CODE       #################################################
 
 # Check cam is working
-if cam.is_open == False:
+if cam.isOpen() == False:
     print("Couldn't open the camera.")
 else:
     print("Camera opened. Press 'q' to exit.")
 
 # Capture frame by frame
-while cam.is_open:
-    frame = cam.capture_array()
+while cam.isOpen():
+    frame = cam.getFrame()
 
     # Check for fire or smoke
     results = model.predict(frame)
@@ -59,7 +57,7 @@ while cam.is_open:
         print('Img saved in:', fn)
         time.sleep(1)
         
-        send_notification(info, fn)
+        send_notification(info[:-2], fn)
         time.sleep(configuracion['server']['notification_delay'])
         
         c += 1
