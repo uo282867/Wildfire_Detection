@@ -71,7 +71,7 @@ docker-compose start
 ------------
 **Antes de comenzar** </br>
 Esta aplicación esta ideada para ser empleada en un sistema empotrado. 
-En este caso, fue diseñado para una Raspberry PI 4, con una cámara [Raspberry Pi High Quality Camera](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/). En caso de emplear otro sistema empotrado y/o cámara (incompatible con Picamera2) será necesario cambiar como mínimo el script: ***predict-camera.py***.
+En este caso, fue diseñado para una Raspberry PI 4, con una cámara [Raspberry Pi High Quality Camera](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/). En caso de emplear otro sistema empotrado y/o cámara (incompatible con Picamera2) será necesario cambiar como mínimo el script: ***predict-camera.py***, cambiar el script de la cámara (*from camera.picam2 import Camera*) y si fuese necesario crear un nuevo script que se adapte a tu cámara siguiendo la interfaz.
 
 Es necesario también, sustituir en el archivo config.json `YOUR_SERVER_IP` por la IP del dispositivo en el que se esté ejecutando la **API** (ver: Server Database). Además, si se ha modificado la **API_KEY** de como se mencionó anteriormente se ha de sustituir también en este archivo por la nueva.
 
@@ -239,7 +239,7 @@ docker-compose start
 ------------
 **Before Starting** </br>
 This application is designed to be used on an embedded system. 
-In this case, it was designed for a Raspberry PI 4, with a [Raspberry Pi High Quality Camera](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/). If using another embedded system and/or camera (incompatible with Picamera2) it will be necessary to change at least the script: ***predict-camera.py***.
+In this case, it was designed for a Raspberry PI 4, with a [Raspberry Pi High Quality Camera](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/). If using another embedded system and/or camera (incompatible with Picamera2) it will be necessary to change at least the script: ***predict-camera.py***, change the import of the camera script (*from camera.picam2 import Camera*) and create a new script in case of need.
 
 It is also necessary to replace `YOUR_SERVER_IP` in the config.json file with the IP of the device running the **API** (see: Server Database). Additionally, if the **API_KEY** has been modified as mentioned earlier, it must also be replaced in this file with the new one.
 
