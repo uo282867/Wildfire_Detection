@@ -69,12 +69,14 @@ while cam.isOpen():
             img_bytes = img_encoded.tobytes()
             send_notification(info[:-2], img_bytes)
             time.sleep(config['server']['notification_delay'])
-            filterDict['fails'] , filterDict['predicts'] = 0
+            filterDict['fails'] = 0
+            filterDict['predicts'] = 0
 
     else:
         filterDict['fails'] += 1
         if filterDict['fails'] >= config['model']['reset_margin'] :
-            filterDict['fails'] , filterDict['predicts'] = 0
+            filterDict['fails'] = 0
+            filterDict['predicts'] = 0
         
     time.sleep(config['model']['delay'])    
     
