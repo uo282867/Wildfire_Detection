@@ -2,16 +2,22 @@
     "server": {
         "url": "http://YOUR_SERVER_IP:5000/add",
         "key": "6cb333a9-d6fb-4286-a156-b5d4bfc57e68",
-        "notification_delay" : 5
+        "notification_delay" : 10
     },
 
     "model": {
         "path" : "./models/8_n/",
-        "name" : "best.pt"
+        "name" : "best.pt",
+        "delay" : 3,
+        "needed_predicts" : 5,
+        "reset_margin" : 2,
+        "conf" : 0.1
     },
 
     "output": {
         "path" : "./CameraPredicts/8_n",
         "img_limit" : 200
-    }
+    },
+
+    "debug" : false
 }

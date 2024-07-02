@@ -4,29 +4,25 @@ import io
 import json
 
 with open('config.json', 'r') as f:
-    configuracion = json.load(f)
+    config = json.load(f)
 
-def send_notification(message, img_url):
-    # Open and read the image
-    with open(img_url, 'rb') as img_file:
-        img_data = img_file.read()
-
+def send_notification(message, img):
     # Notification payload
     payload = {
         'title': 'WARNING: WildFire Detection',
         'message': message, 
-        'key' : configuracion['server']['key']
+        'key' : config['server']['key']
     }
     
 
     # Send the image
     files = {
-        'img': (img_url, img_data, 'image/png')
+        'img': ('predict.jpg', img, 'image/jpeg')
     }
-    print(configuracion['server']['url'])
+    print(config['server']['url'])
 
     # POST request
-    response = requests.post(configuracion['server']['url'], data=payload, files=files)
+    response = requests.post(config['server']['url'], data=payload, files=files)
 
 
     # Check status
