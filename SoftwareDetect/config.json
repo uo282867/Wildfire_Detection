@@ -19,5 +19,10 @@
         "img_limit" : 200
     },
 
+    "httpcam": {
+        "health" : "http://localhost:5005/health",
+        "img" : "http://localhost:5005/img"
+    },
+
     "debug" : false
 }

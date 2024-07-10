@@ -72,13 +72,16 @@ docker-compose start
 **Antes de comenzar** </br>
 Esta aplicación esta ideada para ser empleada en un sistema empotrado. 
 En este caso, fue diseñado para una Raspberry PI 4, con una cámara [Raspberry Pi High Quality Camera](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/). En caso de emplear otro sistema empotrado y/o cámara (incompatible con Picamera2) será necesario cambiar como mínimo el script: ***predict-camera.py***, cambiar el script de la cámara (*from camera.picam2 import Camera*) y si fuese necesario crear un nuevo script que se adapte a tu cámara siguiendo la interfaz.
+También se propone una forma para poder ejecutar el script de inferencia obteniendo imáges de una cámara en una Jetson Nano.
+Las cámaras empleadas en ambos dispositivos son cámaras CSI, en caso de emplear otra cámara se ha de crear un script nuevo para manejar esta esntrada de datos.
 
 Es necesario también, sustituir en el archivo config.json `YOUR_SERVER_IP` por la IP del dispositivo en el que se esté ejecutando la **API** (ver: Server Database). Además, si se ha modificado la **API_KEY** de como se mencionó anteriormente se ha de sustituir también en este archivo por la nueva.
 
 También es necesario tener instalado [Python3](https://www.python.org/).
 
 ------------
-#### Instalar dependencias
+#### Raspberry Pi 4
+##### Instalar dependencias
 **Picamera 2** </br>
 En caso de cualquier posible error con la instalación, consultar la documentación oficial: https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf
 ```
@@ -126,12 +129,46 @@ sudo apt install -y python3-pillow
 sudo apt install -y python3-opencv
 ```
 
-#### Puesta en marcha
+##### Puesta en marcha
 ```
 # bash
 cd /dir/del/proyecto/SoftwareDetect
 python3 predict-camera.py
 ```
+
+#### Jetson Nano.
+Para poder ejecutar este servicio en una Jetson Nano es necesario usar Docker para ejecutar YOLOv8. Es por esto por lo que se plantea la siguiente solución para comunicar la cámara con el contenedor docker.
+Es necesario tener instalado en la Jetson Nano OpenCV con GStreamer activado.
+Antes de ejecutar los scripts se ha de modificar el script ***predict-camera.py***:
+Modificar el siguiente import:
+```
+# OLD
+from camera.picam2 import Camera
+
+# NEW
+from camera.http_cam import Camera
+
+```
+
+Una vez modificado el script, ahora debemos ejecutar dos scripts de forma simultanea (emplear dos terminales): </br>
+**Primer Script:** </br>
+```
+# bash
+pip install numpy==1.19.4
+pip install flask
+python3 predict-camera.py
+```
+
+**Segundo Script:** </br>
+```
+# bash
+t=ultralytics/ultralytics:latest-jetson-jetpack4 && sudo docker pull $t && sudo docker run -it --ipc=host --runtime=nvidia --network="host" -v (RUTA AL DIRECTORIO DEL PROYECTO)/Wildfire_Detection/SoftwareDetect:/inference $t
+cd /inference
+python3 predict-camera.py
+```
+
+Con estos dos scripts funcionando de manera simultanea debería ser suficiente para obtener las imágenes de la cámara CSI de tu Jetson Nano, procesar los datos obtenidos y enviar alertas al servidor. 
+
 
 ### Train
 ------------
@@ -240,13 +277,16 @@ docker-compose start
 **Before Starting** </br>
 This application is designed to be used on an embedded system. 
 In this case, it was designed for a Raspberry PI 4, with a [Raspberry Pi High Quality Camera](https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/). If using another embedded system and/or camera (incompatible with Picamera2) it will be necessary to change at least the script: ***predict-camera.py***, change the import of the camera script (*from camera.picam2 import Camera*) and create a new script in case of need.
+Additionally, a method is proposed to run the inference script by obtaining images from a camera on a Jetson Nano. 
+The cameras used on both devices are CSI cameras. If another type of camera is used, a new script must be created to handle this data input.
 
 It is also necessary to replace `YOUR_SERVER_IP` in the config.json file with the IP of the device running the **API** (see: Server Database). Additionally, if the **API_KEY** has been modified as mentioned earlier, it must also be replaced in this file with the new one.
 
 It is also necessary to have [Python3](https://www.python.org/) installed.
 
 ------------
-#### Install Dependencies
+#### Raspberry Pi 4
+##### Install Dependencies
 **Picamera 2** </br>
 In case of any possible error with the installation, refer to the official documentation: https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf
 ```
@@ -294,12 +334,45 @@ sudo apt install -y python3-pillow
 sudo apt install -y python3-opencv
 ```
 
-#### Startup
+##### Startup
 ```
 # bash
 cd /project/directory/SoftwareDetect
 python3 predict-camera.py
 ```
+
+#### Jetson Nano.
+To run this service on a Jetson Nano, you need to use Docker to execute YOLOv8. Therefore, the following solution is proposed to communicate the camera with the Docker container.
+You must have OpenCV installed on the Jetson Nano with GStreamer enabled.
+Before running the scripts, you need to modify the script ***predict-camera.py***:
+Modify the following import:
+```
+# OLD
+from camera.picam2 import Camera
+
+# NEW
+from camera.http_cam import Camera
+```
+
+Once the script is modified, you need to run two scripts simultaneously (use two terminals): </br>
+**First Script:** </br>
+```
+# bash
+pip install numpy==1.19.4
+pip install flask
+python3 predict-camera.py
+```
+
+**Second Script:** </br>
+```
+# bash
+t=ultralytics/ultralytics:latest-jetson-jetpack4 && sudo docker pull $t && sudo docker run -it --ipc=host --runtime=nvidia --network="host" -v (PATH TO PROJECT DIRECTORY)/Wildfire_Detection/SoftwareDetect:/inference $t
+cd /inference
+python3 predict-camera.py
+```
+
+With these two scripts running simultaneously, it should be enough to get images from the CSI camera on your Jetson Nano, process the obtained data, and send alerts to the server.
+
 
 ### Train
 ------------

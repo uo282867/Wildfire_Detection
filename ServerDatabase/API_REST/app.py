@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 UPLOAD_FOLDER = './static/images'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Función para conectarse a la base de datos
+# Connect to DB
 def connect_db():
     conn = psycopg2.connect(
         host='timescaledb',  
@@ -24,7 +24,7 @@ def connect_db():
     return conn
 
 
-# Función para consultar los datos desde la base de datos
+# Generic querry to DB
 def simple_querry(query):
     conn = connect_db()
     cursor = conn.cursor()
@@ -51,6 +51,7 @@ def add_data():
             img = request.files['img']
             new_id = uuid.uuid4()
 
+            # Save img in local
             filename = f"{new_id}.jpg"
             image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             img.save(image_path)
@@ -58,7 +59,7 @@ def add_data():
             conn =  connect_db()
             cur = conn.cursor(cursor_factory=RealDictCursor)
 
-            # Insertar datos en la base de datos
+            # Insert data in DB
             cur.execute("insert into camera_data (time, id, alert, seen) VALUES (NOW(), %s, %s, FALSE);", (str(new_id), alert))
 
             conn.commit()
@@ -98,7 +99,7 @@ def seen(id):
 
     app.logger.info(f'Seen img -> {id}')
 
-    # Insertar datos en la base de datos
+    # Mark the alert as readed
     cur.execute("UPDATE camera_data SET seen=TRUE WHERE id = %s;", (id,))
 
     conn.commit()
